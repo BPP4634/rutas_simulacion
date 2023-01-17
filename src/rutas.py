@@ -21,3 +21,19 @@ def lee_rutas(fichero):
             vel_min=int(vel_min.strip())
             result.append(Ruta(ciudad_inicio,coordenada,fecha_ruta,km,gasolineras,dificultad,zona_descanso,vel_max,vel_min))
     return result
+
+def acumular_kms_por_meses(rutas):
+    result=defaultdict(lambda:[0.0]*12)
+    for r in rutas:
+        result[r.fecha_ruta.year][r.fecha_ruta.month-1]+=r.km
+    return dict(sorted(result.items()))
+
+def calcular_diferencia_km(kms):
+    return [e2-e1 for e1,e2 in zip(kms,kms[1:])]
+
+def diferencias_kms_meses_anyo(rutas):
+    aux=acumular_kms_por_meses(rutas)
+    result={}
+    for a in aux:
+        result[a]=calcular_diferencia_km(aux[a])
+    return result
