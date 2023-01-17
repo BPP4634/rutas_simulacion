@@ -33,12 +33,19 @@ def test_ciudades_top_tiempo_dificultad(rutas,n=3):
 
 def main():
     DATOS=lee_rutas('./data/rutas_motos.csv')
-    # test_lee_rutas(DATOS)
-    # test_acumular_kms_por_meses(DATOS)
-    # test_diferencias_kms_meses_anyo(DATOS)
-    # test_top_rutas_lejanas(DATOS,2,Coordenada(35.15,-8.76))
-    # test_top_rutas_lejanas(DATOS,2,Coordenada(35.15,-8.76),100)
+    print('\n===EJERCICIO 1===')
+    test_lee_rutas(DATOS)
+    print('\n===EJERCICIO 2===')
+    test_acumular_kms_por_meses(DATOS)
+    print('\n===EJERCICIO 3===')
+    test_diferencias_kms_meses_anyo(DATOS)
+    print('\n===EJERCICIO 4===')
+    test_top_rutas_lejanas(DATOS,2,Coordenada(35.15,-8.76))
+    test_top_rutas_lejanas(DATOS,2,Coordenada(35.15,-8.76),100)
+    test_top_rutas_lejanas(DATOS,2,Coordenada(35.15,-8.76),150)
+    print('\n===EJERCICIO 5===')
     test_ciudades_top_tiempo_dificultad(DATOS)
+    test_ciudades_top_tiempo_dificultad(DATOS,5)
 
 if __name__=='__main__':
     main()

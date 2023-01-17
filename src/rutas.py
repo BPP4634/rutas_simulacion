@@ -1,5 +1,5 @@
 from parsear import *
-from collections import namedtuple,Counter,defaultdict
+from collections import namedtuple,defaultdict
 import csv
 
 Ruta=namedtuple('Ruta','ciudad_inicio,coordenada,fecha_ruta,km,gasolineras,dificultad,zona_descanso,vel_max,vel_min')
@@ -33,10 +33,7 @@ def calcular_diferencia_km(kms):
 
 def diferencias_kms_meses_anyo(rutas):
     aux=acumular_kms_por_meses(rutas)
-    result={}
-    for a in aux:
-        result[a]=calcular_diferencia_km(aux[a])
-    return result
+    return {a:calcular_diferencia_km(aux[a]) for a in aux}
 
 def distancia_Manhattan(coor1,coor2):
     return abs(coor1.latitud-coor2.latitud)+abs(coor1.longitud-coor2.longitud)
