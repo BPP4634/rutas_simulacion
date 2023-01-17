@@ -37,3 +37,21 @@ def diferencias_kms_meses_anyo(rutas):
     for a in aux:
         result[a]=calcular_diferencia_km(aux[a])
     return result
+
+def distancia_Manhattan(coor1,coor2):
+    return abs(coor1.latitud-coor2.latitud)+abs(coor1.longitud-coor2.longitud)
+
+def top_rutas_lejanas(rutas,n,c,km_min=None):
+    result=rutas
+    if km_min!=None:
+        result=[r for r in rutas if r.km>km_min]
+    return sorted(result,key=lambda x:distancia_Manhattan(c,x.coordenada),reverse=True)[:n]
+
+def ciudades_top_tiempo_dificultad(rutas,n=3):
+    result=defaultdict(list)
+    for r in rutas:
+        if r.zona_descanso:
+            result[r.dificultad]+=[r]
+    for r in result:
+        result[r]=[s.ciudad_inicio for s in sorted(result[r],key=lambda x:(x.km/x.vel_min),reverse=True)[:n]]
+    return result
